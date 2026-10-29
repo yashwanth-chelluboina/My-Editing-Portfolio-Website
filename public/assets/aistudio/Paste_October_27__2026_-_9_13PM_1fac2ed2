@@ -1,0 +1,734 @@
+# MASTER PROMPT — YASHWANTH EDITS | CINEMATIC 3D PORTFOLIO, REALISTIC MACBOOK INTRO, SCROLL ANIMATIONS & PERFORMANCE OPTIMIZATION
+
+Act as a senior React and TypeScript engineer, Three.js and WebGL specialist, GSAP animation engineer, performance optimization expert, and cinematic website designer.
+
+Modify my **existing Yashwanth Edits portfolio project directly in Google AI Studio**. Inspect the complete existing codebase before making changes. Preserve the working website, project data, components, navigation, contact links, existing assets, and current visual identity wherever possible.
+
+Do not merely explain what needs to be done. Do not return only a prompt, mockup, partial example, or isolated component. **Implement the changes in the actual source files, provide the complete corrected code, and verify the implementation using the available preview and development tools.**
+
+The final result must be a polished, production-minded, responsive, cinematic 3D portfolio with smooth scrolling, a physically convincing MacBook animation, realistic video-editing screen content, and reliable interactions.
+
+---
+
+# 1. THE MOST IMPORTANT REQUIREMENT — EXACT INTRO ANIMATION SEQUENCE
+
+The website currently has problems with background lag, ineffective scroll animations, incorrect camera transitions, and content appearing before the laptop sequence finishes.
+
+Fix these issues at the source-code level.
+
+The opening experience MUST follow this exact sequence:
+
+**NAVBAR ONLY → CLOSED MACBOOK → MACBOOK GRADUALLY OPENS → EDITING SCREEN REVEALED → CAMERA ZOOMS INTO SCREEN → WEBSITE CONTENT APPEARS → NORMAL WEBSITE SCROLLING**
+
+The navbar must remain visible and functional throughout the sequence. Until the laptop has fully opened, no hero text, portrait, skill tags, buttons, introduction cards, or other foreground content may be visible.
+
+Do not reveal the introduction merely because the user has started scrolling. Reveal it only after the entire laptop opening and screen-zoom transition has completed.
+
+## Stage 0 — Initial state
+
+At the very top of the page:
+
+- Display the fixed or sticky navigation bar.
+- Show a cinematic dark studio with black, charcoal, and deep-purple tones.
+- Place a realistic, closed Apple MacBook Pro prominently in the central visual area.
+- The lid must rest naturally against the base.
+- The keyboard and trackpad must not be visible while the laptop is closed.
+- Use restrained purple rim lighting, realistic metallic reflections, subtle contact shadows, and a dark studio floor.
+- Keep atmospheric particles minimal or remove them if they affect performance.
+- Hide every foreground website element except the navbar.
+
+Set the initial state deterministically. Do not use arbitrary timers to reveal content.
+
+The initial page must not briefly flash the hero text before the 3D scene loads. Use an appropriate loading state or initialized visibility state to prevent this flash.
+
+## Stage 1 — Scroll-controlled MacBook opening
+
+Create a dedicated, pinned or carefully staged introductory scroll section. The pin must apply only to the intro sequence, never to the entire website.
+
+As the user scrolls down through the opening stage, the MacBook must gradually open from fully closed to fully open.
+
+At 0% opening progress:
+
+- Lid fully closed.
+- Screen off.
+- Base stationary.
+- Hero content hidden.
+
+At intermediate progress:
+
+- The lid rotates smoothly around a physically correct rear hinge.
+- The laptop base remains stationary.
+- The screen gradually illuminates.
+- The display reveals the video-editing workspace.
+- The camera may make a subtle, coordinated framing adjustment without obscuring the laptop.
+
+At 100% opening progress:
+
+- The lid reaches a realistic working angle of approximately 100–110 degrees.
+- The keyboard, individual keycaps, trackpad, display bezel, hinge, and screen are clearly visible.
+- The editing interface is fully illuminated and recognizable.
+- The laptop opening is complete before the next stage begins.
+
+Use actual scroll position to control the lid angle. Scrolling upward must reverse the opening naturally.
+
+Do not use a time-based opening animation that continues regardless of the user's scroll position.
+
+## Stage 2 — Camera zooms directly into the laptop display
+
+Only when the laptop lid has reached its fully open position may the camera zoom stage begin.
+
+As the user continues scrolling:
+
+1. Keep the MacBook fully open.
+2. Keep the base and lid at their final transforms.
+3. Gradually move the camera toward the front of the display.
+4. Align the camera with the screen plane.
+5. Increase the display's size until it fills the viewport.
+6. Make the screen transition feel like a real cinematic camera push-in.
+7. Transition seamlessly from the 3D display into the website's introduction.
+
+The zoom must target the actual screen surface, not the laptop body, keyboard, or back of the lid.
+
+Avoid abrupt cuts, incorrect camera orientation, distorted perspective, clipping through the chassis, black flashes, and sudden jumps in scale.
+
+Use a carefully designed screen-space transition or matching overlay if necessary to hide the final transition between 3D space and the website interface. The transition must still feel like the camera is entering the display.
+
+The zoom must be controlled by its own dedicated scroll progress, independent of the opening progress.
+
+**The laptop must not continue opening while the camera zooms.**
+
+## Stage 3 — Reveal the website only after the screen zoom
+
+The website introduction must remain completely invisible and non-interactive until the camera has finished zooming into the screen.
+
+After the zoom reaches its completed state:
+
+- Complete the screen transition.
+- Reveal the introduction text with a cinematic staggered animation.
+- Reveal the portrait and professional skill tags.
+- Reveal the appropriate buttons and other hero elements.
+- Release the introductory scroll pin.
+- Allow ordinary page scrolling to continue naturally.
+
+Use opacity, clipping, translation, and subtle scale transitions where appropriate. Avoid excessive motion.
+
+Manage visibility and pointer events correctly. Hiding text visually is not enough if invisible buttons remain interactive.
+
+The first visible introduction must contain:
+
+“WHO AM I?”
+
+“Yashwanth Chelluboina”
+
+The introduction must explain my creative identity, AI prompting ability, visual storytelling, editing skills, and ability to turn ideas into polished visual content.
+
+## Stage 4 — Permanently lock the laptop after the intro
+
+This is a strict requirement.
+
+Once the intro animation and zoom are complete, normal page scrolling must never move the laptop again.
+
+Lock the following values:
+
+- Laptop position.
+- Laptop scale.
+- Laptop rotation.
+- Lid angle.
+- Base transforms.
+- Camera position and orientation, once the transition has completed.
+
+Do not drive the laptop or camera from global page-scroll progress after the intro.
+
+The 3D scene may be hidden, unmounted, or paused after the screen transition if that is the most efficient implementation. Preserve the intended transition and do not abruptly remove the laptop before the zoom finishes.
+
+When the visitor scrolls through Education, Work Experience, Showreel, and Let's Talk, those sections must animate normally without affecting the completed laptop animation.
+
+When the visitor scrolls back upward through the intro, reverse the sequence correctly:
+
+1. Hide the hero content.
+2. Reverse the screen zoom.
+3. Return to the fully open laptop.
+4. Close the laptop gradually.
+5. Restore the initial navbar-only state.
+
+Do not let multiple animation timelines write to the same transform simultaneously.
+
+---
+
+# 2. CREATE A REALISTIC, DETAILED 3D APPLE MACBOOK PRO
+
+The laptop must look like a premium physical product, not a primitive collection of obvious boxes or a flat image.
+
+Use Three.js and the project's existing React rendering architecture. If React Three Fiber is already used, preserve it where practical. If the current implementation uses a custom Three.js renderer, improve that implementation instead of introducing an unnecessary second rendering system.
+
+Create separate logical components for:
+
+- Aluminum laptop base.
+- Rear hinge and hinge pivots.
+- Independently rotating lid.
+- Outer lid shell.
+- Inner display bezel.
+- Display glass and screen texture.
+- Individual or efficiently instanced keyboard keycaps.
+- Function-key row.
+- Trackpad.
+- Speaker grilles.
+- Subtle chassis details.
+- Contact shadow and studio floor.
+
+The lid must rotate around the actual rear hinge, not the center of the laptop. Use a correct parent-child hierarchy so the lid opens without stretching, floating, or disconnecting from the base.
+
+### Laptop detailing
+
+Include:
+
+- Premium space-black or dark-silver aluminum material.
+- Rounded chassis corners.
+- Thin display bezels.
+- Realistic hinge geometry.
+- A complete keyboard layout with individual visible keys.
+- A large glass-like trackpad.
+- Speaker grille details.
+- Natural metallic highlights.
+- Subtle purple edge reflections.
+- Realistic screen illumination.
+- Appropriate contact shadows and ambient occlusion, implemented efficiently.
+
+Use physically convincing proportions and perspective.
+
+An optimized, legally usable 3D model is acceptable if its lid and base are independently controllable. Otherwise, construct the laptop from custom geometry.
+
+Do not use a flat laptop photograph as the 3D model. Do not rely on an oversized flat plane to simulate the entire laptop.
+
+Apple and MacBook are reference descriptions for the intended hardware appearance. Do not invent an official Apple partnership or add misleading branding.
+
+---
+
+# 3. REALISTIC VIDEO-EDITING WORKSPACE ON THE LAPTOP SCREEN
+
+When the laptop opens, its screen must reveal a detailed, recognizable professional video-editing workspace.
+
+Create an optimized canvas-based screen texture or another efficient rendering approach mapped precisely to the laptop display.
+
+The workspace should have a dark, professional video-editing aesthetic inspired by modern non-linear editing applications.
+
+Include:
+
+- A large program monitor displaying cinematic footage.
+- A media browser with thumbnail previews.
+- A project and sequence panel.
+- Multiple horizontal video tracks.
+- Multiple audio tracks.
+- Distinctly colored video clips.
+- Audio waveform shapes.
+- Timeline rulers and timecodes.
+- A visible playhead.
+- A professional editing toolbar.
+- Color-grading controls.
+- Subtle interface panels and labels.
+- A preview frame that resembles actual cinematic footage.
+
+The timeline should look like a real editing project rather than decorative colored rectangles.
+
+Create sample preview imagery representing:
+
+1. Cinematic landscape footage.
+2. A premium product close-up.
+3. A dramatic city scene.
+4. A creative advertisement.
+5. A final color-graded cinematic shot.
+
+Use original generated visuals, locally supplied images, or assets that are legally usable. Do not depend on unauthorized copyrighted footage.
+
+### Screen behavior
+
+While the laptop is opening:
+
+- The screen transitions naturally from dark to illuminated.
+- The editing interface gradually becomes visible.
+- The preview image becomes recognizable.
+- The timeline clips, audio waveforms, and playhead are clearly visible.
+- A restrained playhead animation or preview change suggests an active editing session.
+
+During the subsequent camera zoom, keep the editing interface correctly aligned to the screen and preserve its aspect ratio.
+
+At the end of the zoom, the screen must fill the viewport and transition seamlessly into the website content.
+
+The screen texture must be easy to replace with my own image or video later.
+
+Do not attempt to recreate a complete commercial video-editing application. The goal is a convincing, optimized visual representation.
+
+---
+
+# 4. FIX THE EXISTING PERFORMANCE PROBLEMS BEFORE ADDING EFFECTS
+
+The current background is lagging significantly. Diagnose and correct the actual source of the performance problem.
+
+The existing project history identifies these potential bottlenecks, which must be verified against the current code:
+
+- App-wide React state updates on every scroll pixel.
+- Duplicate `requestAnimationFrame` loops.
+- Lenis and GSAP ScrollTrigger running without proper synchronization.
+- Expensive transmission materials and unnecessary multipass rendering.
+- High-resolution real-time shadows.
+- Instanced mesh matrices being uploaded every frame unnecessarily.
+- React state updates during frequent mouse movement.
+- An always-running WebGL render loop when the scene is offscreen.
+- Duplicate timelines and event listeners.
+- Excessive particles, post-processing, and large textures.
+
+Do not assume these issues all remain present. Inspect the actual source code and fix the problems that exist.
+
+### Performance implementation requirements
+
+- Avoid unnecessary full-app React re-renders during scrolling.
+- Use refs for high-frequency animation values.
+- Use GSAP ScrollTrigger for scroll-linked animations.
+- If Lenis is already installed, integrate it correctly with GSAP and ScrollTrigger rather than running conflicting scroll systems.
+- Avoid multiple independent animation loops.
+- Use efficient geometry, materials, and instancing.
+- Cap device pixel ratio appropriately.
+- Use restrained lighting and shadows.
+- Avoid expensive real-time transmission unless genuinely needed.
+- Avoid continuous texture redraws when the content is static.
+- Pause or reduce rendering when the scene is offscreen or the browser tab is hidden.
+- Clean up GPU resources, listeners, timelines, and ScrollTriggers.
+- Prevent duplicate initialization during React Strict Mode.
+- Use lazy loading where practical.
+- Respect `prefers-reduced-motion`.
+- Provide a simpler fallback for mobile and lower-powered devices.
+
+The target is smooth, responsive scrolling with a premium appearance. Do not add effects at the expense of usability.
+
+Prioritize performance before adding decorative animation.
+
+---
+
+# 5. WEBSITE BRANDING AND NAVIGATION
+
+Website brand: **Yashwanth Edits**
+
+My full name is **Yashwanth Chelluboina**.
+
+Use my supplied logo image if it is available in the project assets. If the logo is unavailable or unsuitable, use clean, professional text branding rather than inventing a replacement logo.
+
+Create a polished navigation bar with:
+
+- Left: Yashwanth Edits logo or wordmark.
+- Center or right: Who Am I, Education, Work Experience, Showreel.
+- Far right: a prominent “Let's Talk” button.
+
+Keep the navbar visible during the opening sequence. Use a restrained dark background, subtle border, and purple accent styling.
+
+Navigation must work correctly with smooth scrolling and must not conflict with the intro pinning or screen zoom.
+
+Use semantic links and accessible focus states.
+
+---
+
+# 6. WHO AM I? — INTRODUCTION SECTION
+
+This section must appear only after the MacBook has opened and the camera has completed the screen zoom.
+
+Name: Yashwanth Chelluboina.
+
+Professional roles:
+
+- AI Prompt Engineer.
+- Video Editor.
+- Photo Editor.
+- Graphic Designer.
+
+Create a compelling introduction that communicates my creative identity, technical understanding of AI prompting, attention to detail, storytelling ability, and visual design skills.
+
+Avoid generic, exaggerated claims. Present me as a multidisciplinary creative professional who combines structured prompting, creative direction, editing, and visual design to turn concepts into polished content.
+
+### Layout
+
+- Strong, editorial headline.
+- Clear introduction paragraph.
+- My portrait on the opposite side or in a visually balanced composition.
+- Four interactive professional skill tags.
+- A prominent work or showreel button where appropriate.
+
+Each skill tag should have tasteful hover and focus effects, subtle depth, a purple highlight, and a short description when interacted with.
+
+Use my actual portrait if it exists in the project. Otherwise, create a clearly marked placeholder and explain how I can replace it. Never present a generic image as my real portrait.
+
+---
+
+# 7. EDUCATION SECTION
+
+Create a clean, cinematic education section with a scroll-linked timeline or progressive reveal.
+
+Use the following exact information:
+
+**B.Tech in Artificial Intelligence & Data Science**
+
+2022–2026
+
+Vishnu Institute of Technology, Bhimavaram.
+
+Do not invent grades, awards, achievements, or additional qualifications.
+
+Use subtle animated timeline progression, elegant typography, and a balanced layout.
+
+---
+
+# 8. WORK EXPERIENCE AND CREATIVE PROJECT PORTFOLIO
+
+Create a Work Experience section that showcases my work across:
+
+1. Video Editing.
+2. Photo Editing.
+3. Graphic Designing.
+
+I am building a portfolio to demonstrate my creative skills. Do not invent company names, clients, employment history, or professional achievements.
+
+Organize the section into three distinct categories, with **three project slots per category**, for a total of nine replaceable projects.
+
+### Video Editing — three projects
+
+Each project should support:
+
+- Project title.
+- Short description.
+- Video thumbnail or poster.
+- Video URL or local asset.
+- Project category.
+- Optional project tools or techniques.
+
+### Photo Editing — three projects
+
+Each project should support:
+
+- Project title.
+- Short description.
+- Image thumbnail.
+- Full-size image.
+- Project category.
+
+### Graphic Designing — three projects
+
+Each project should support:
+
+- Project title.
+- Short description.
+- Design thumbnail.
+- Full-size image or project URL.
+- Project category.
+
+Use an attractive grid or editorial gallery with cinematic reveal animations, subtle image parallax, smooth hover states, and carefully designed project detail modals.
+
+Do not load all large media files immediately if doing so causes lag.
+
+## Essential asset replacement instructions
+
+Create or preserve a centralized project data file, such as `src/data/projects.ts`, if that matches the current project structure.
+
+Each of the nine projects must have clearly documented fields and a simple way to replace its title, description, thumbnail, and media URL.
+
+Add comments directly beside the relevant asset fields, for example:
+
+`// REPLACE: Add your video thumbnail image URL here.`
+
+`// REPLACE: Add your actual project video URL here.`
+
+`// REPLACE: Add your full-resolution photo URL here.`
+
+`// REPLACE: Add your graphic design preview URL here.`
+
+Use descriptive comments for the actual files and fields in the implementation rather than leaving vague instructions.
+
+Use working placeholder assets or elegant placeholder cards when media is missing. Never leave broken image icons or broken video players.
+
+Provide a short asset guide explaining exactly where I should place local images and videos, and how to replace them with hosted URLs later.
+
+---
+
+# 9. SHOWREEL SECTION
+
+Create a visually impressive Showreel section with a real HTML video player.
+
+The section must support:
+
+- A replaceable video source.
+- A custom thumbnail or poster image.
+- A play/pause control.
+- A clear title and short description.
+- Responsive 16:9 video presentation.
+- A tasteful cinematic entrance.
+- A controlled transition from the preceding section.
+
+Use an actual playable video, not a decorative image pretending to be a video.
+
+Add a clearly documented placeholder source and explain how to replace it with my own hosted showreel.
+
+Do not autoplay audio. If autoplay previews are used, they must be muted, lightweight, and respectful of browser restrictions.
+
+Lazy-load the video where practical and avoid downloading the entire file before the visitor reaches the Showreel section.
+
+---
+
+# 10. LET'S TALK — CONTACT SECTION
+
+Create a polished final contact section with the heading “Let's Talk” and a clear invitation for collaboration, creative work, video editing, AI video generation, photo editing, and graphic design.
+
+Use the following real contact details:
+
+- Email: chyashwanth.2522@gmail.com
+- Phone: +91 95734 36960
+- Instagram: https://www.instagram.com/yashwanth_chelluboina/
+- GitHub: https://github.com/yashwanth-chelluboina
+
+Create individual contact cards or buttons so visitors can choose their preferred contact method.
+
+The buttons must work:
+
+- Email opens a `mailto:` link.
+- Phone opens a `tel:` link.
+- Instagram opens my supplied Instagram profile.
+- GitHub opens my supplied GitHub profile.
+
+Use accessible icons, hover effects, clear labels, and mobile-friendly layouts. Open external links safely where appropriate.
+
+Do not invent additional contact accounts.
+
+---
+
+# 11. REAL SCROLL EFFECTS THROUGHOUT THE WEBSITE
+
+Implement actual scroll-triggered animation, not just static CSS effects.
+
+Use GSAP and ScrollTrigger where appropriate.
+
+Add:
+
+- Smooth, natural scrolling.
+- Staggered text reveals.
+- Section entrance and exit transitions.
+- Scroll-linked opacity and translation.
+- Subtle image parallax.
+- Progressive project-card reveals.
+- Animated education timeline progression.
+- A restrained scroll-progress indicator.
+- Cinematic transitions into the Showreel and contact sections.
+- Reversible animation when scrolling upward.
+- Subtle hover and focus interactions.
+- Carefully controlled background lighting transitions.
+
+Animations must be coordinated and readable. Do not animate every element independently or make the website feel like a slideshow.
+
+Do not let section animations modify the locked laptop transforms or completed camera position.
+
+If the project already contains a smooth-scroll library, reuse it correctly instead of installing duplicate scrolling systems.
+
+---
+
+# 12. VISUAL DESIGN SYSTEM
+
+Maintain the Yashwanth Edits visual identity.
+
+Primary aesthetic:
+
+- Black and near-black backgrounds.
+- Deep purple and violet highlights.
+- Subtle lavender typography accents.
+- Metallic dark-silver materials.
+- Cinematic studio lighting.
+- Professional editorial typography.
+- High-quality photography and video previews.
+- Tasteful glass-like panels only where useful.
+- Clean, readable content layouts.
+
+The result should feel like a premium creative portfolio combining the atmosphere of a technology product advertisement with the sophistication of a professional video editor's showreel.
+
+Avoid excessive neon, oversized glowing borders, excessive particles, generic template layouts, and unnecessary decorative elements.
+
+Use consistent spacing, responsive typography, clear visual hierarchy, and accessible contrast.
+
+---
+
+# 13. TECHNICAL ARCHITECTURE AND ANIMATION RULES
+
+Inspect the existing package.json and project structure before deciding how to implement the changes.
+
+Preserve the current framework and compatible installed libraries.
+
+Preferred technologies, where already compatible:
+
+- React.
+- TypeScript.
+- Three.js.
+- React Three Fiber and Drei if already used or appropriate.
+- GSAP and ScrollTrigger.
+- Framer Motion where it adds genuine value.
+- Existing styling system and project data.
+
+Do not introduce duplicate renderers or multiple competing animation frameworks unnecessarily.
+
+Separate the intro animation into three independent progress values:
+
+- `openingProgress`: controls the lid rotation and screen illumination only.
+- `zoomProgress`: controls the camera transition into the screen only.
+- `contentRevealProgress`: controls the hero content reveal only.
+
+Use refs or an equivalent efficient animation-state mechanism. Avoid React state updates on every animation frame.
+
+Do not use one global scroll value to control the laptop opening, camera zoom, and later page scrolling.
+
+Create explicit start and end boundaries for the stages. Ensure that the intro can be reversed without jumps.
+
+If a shared state is required between the 3D scene and the React interface, implement a reliable progress callback, ref, or equivalent mechanism.
+
+Keep the navigation responsive during the intro. Prevent invisible foreground elements from intercepting clicks or keyboard input.
+
+Clean up all animation timelines, ScrollTriggers, observers, event listeners, textures, geometries, and materials when necessary.
+
+---
+
+# 14. DEPLOYMENT AND MEDIA HOSTING
+
+Make the website suitable for online deployment so that I do not need to keep running it on localhost for visitors to access it.
+
+Keep media paths configurable and documented.
+
+Use local public assets for small images and logos where appropriate. For larger videos, allow hosted HTTPS URLs from a suitable video or media hosting service.
+
+The website should not depend on files stored only on my computer or on localhost URLs.
+
+Do not hard-code temporary preview URLs or private file-system paths.
+
+Provide a concise README explaining:
+
+1. How to install dependencies.
+2. How to run the project locally.
+3. How to replace the portrait and logo.
+4. How to replace the nine project thumbnails and media.
+5. How to replace the showreel video and poster.
+6. How to deploy the website using a compatible hosting provider, such as Vercel or Netlify.
+7. Which environment variables or external services are required, if any.
+
+Do not claim the website has been deployed unless deployment has actually been completed.
+
+---
+
+# 15. RESPONSIVE DESIGN AND ACCESSIBILITY
+
+The website must work on desktop, laptop, tablet, and mobile.
+
+On desktop, prioritize the complete cinematic MacBook opening and screen-zoom experience.
+
+On smaller devices, use a simplified but visually consistent version if the full 3D scene is too expensive or does not fit the viewport.
+
+Do not force an awkward, oversized laptop animation onto mobile screens.
+
+Ensure that:
+
+- Navigation remains usable.
+- Text is readable.
+- Project cards adapt to screen width.
+- Videos remain responsive.
+- Contact links are easy to tap.
+- Keyboard navigation works.
+- Focus indicators remain visible.
+- Reduced-motion preferences are respected.
+- Essential content is available even when 3D rendering is unavailable.
+
+If WebGL fails or performance is insufficient, show an attractive fallback rather than a blank page.
+
+---
+
+# 16. REQUIRED TESTING AND ACCEPTANCE CHECKLIST
+
+After implementing the changes, inspect the source code and use the available preview, console, build tools, and tests.
+
+Verify the following:
+
+### Initial state
+- Navbar is visible.
+- MacBook starts completely closed.
+- Hero text, portrait, tags, and buttons are hidden.
+- No initial flash of foreground content occurs.
+
+### Opening stage
+- Scrolling opens the lid gradually.
+- The base remains stationary.
+- The hinge rotation is physically correct.
+- The keyboard and trackpad are revealed naturally.
+- The editing interface appears on the screen.
+- No website introduction appears before the laptop is fully open.
+
+### Zoom stage
+- The zoom starts only after opening completes.
+- The camera targets the front of the display.
+- The screen fills the viewport smoothly.
+- No jitter, clipping, sudden jumps, or black flashes occur.
+- The lid and base remain locked while zooming.
+
+### Content reveal
+- The introduction appears only after the zoom completes.
+- Hero elements animate smoothly into view.
+- Navigation and buttons remain functional.
+- Normal scrolling resumes afterward.
+
+### Post-intro behavior
+- Laptop transforms stay frozen.
+- Camera transforms stay frozen.
+- Education, Work Experience, Showreel, and Let's Talk work normally.
+- The animation does not restart during ordinary scrolling.
+
+### Reverse scrolling
+- Hero content hides at the correct point.
+- Zoom reverses smoothly.
+- The fully open laptop returns.
+- The lid closes gradually.
+- The initial navbar-only state is restored.
+
+### Performance and reliability
+- No excessive React re-renders during scrolling.
+- No duplicate ScrollTriggers or render loops.
+- No memory leaks from animation cleanup.
+- No broken asset paths.
+- No compilation errors.
+- No console errors.
+- No navigation or contact-link regressions.
+- No severe lag on the intro or later sections.
+
+Run the available checks and fix any discovered errors. Clearly distinguish tests that were actually run from behaviors that could not be verified.
+
+---
+
+# 17. FINAL IMPLEMENTATION INSTRUCTIONS
+
+Work directly on the existing project.
+
+First inspect the current source files and determine how the current MacBook, camera, scroll state, hero content, navbar, and sections are implemented.
+
+Then make the changes in the appropriate existing files. Add new components only where needed.
+
+Do not replace the entire website with an unrelated template.
+
+Do not leave the most important logic as pseudocode or TODO comments.
+
+Do not return only a modified MacBook component if the sequence also requires changes to the parent app, scroll orchestration, hero visibility, or CSS. Update every file necessary for the complete experience.
+
+Preserve the existing nine replaceable creative project slots and the contact details provided above.
+
+If a file must be substantially rewritten, provide its complete corrected contents. Keep asset replacement instructions in the actual relevant code comments and README.
+
+Do not silently remove existing working functionality.
+
+At the end, provide a concise implementation summary, list the files changed, explain any remaining setup requirements, and report the actual test results.
+
+## FINAL CREATIVE VISION
+
+Create a premium, cinematic portfolio for Yashwanth Edits.
+
+The visitor first sees only the navigation bar and a closed, realistic metallic MacBook in a dark black-and-purple studio. As they scroll, the lid gradually opens, revealing a convincing professional video-editing workspace with real-looking footage, a multi-track timeline, audio waveforms, and a playhead. Only after the laptop is fully open does the camera push into the display. Once the screen fills the viewport and the transition completes, the introduction appears. The remainder of the website then scrolls normally through Education, nine creative project slots, Showreel, and Let's Talk.
+
+The animation must feel physical, cinematic, controlled, reversible, and smooth.
+
+**Priority order: fix performance first; implement the realistic 3D MacBook second; create the three-stage scroll choreography third; reveal website content only after the screen zoom; then polish all sections, responsiveness, media replacement, and deployment readiness.**
+
+The final result must be a functioning implementation in the existing React project, not merely a visual concept or a description of how to build it.
