@@ -527,17 +527,13 @@ export default function App() {
               visibility: 'hidden',
               pointerEvents: 'none',
             }}
-            // ADDED: overflow-hidden to stop nested scrollbars, reduced vertical paddings
-            className="relative z-20 w-full h-full flex items-center justify-center pt-20 pb-4 px-5 sm:px-8 lg:px-12 overflow-hidden"
+            className="relative z-20 w-full h-full flex items-center justify-center pt-16 px-5 sm:px-8 lg:px-12 overflow-y-auto lg:overflow-hidden"
           >
-            {/* ADDED: h-full flex flex-col justify-center to constraint within mobile viewports */}
-            <div className="w-full max-w-7xl mx-auto h-full flex flex-col justify-center">
-              {/* COMPRESSED: gap-8 -> gap-4 sm:gap-8 lg:gap-12 */}
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-8 lg:gap-12 items-center">
+            <div className="w-full max-w-7xl mx-auto py-8 lg:py-0">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
                 <div
                   ref={heroHeadlineRef}
-                  // COMPRESSED: space-y-6 -> space-y-4 lg:space-y-6
-                  className="lg:col-span-7 flex flex-col justify-center space-y-4 lg:space-y-6"
+                  className="lg:col-span-7 flex flex-col justify-center space-y-6"
                 >
                   <div className="flex items-center gap-2 text-xs font-mono tracking-widest text-violet-400">
                     <span>WHO AM I?</span>
@@ -545,13 +541,12 @@ export default function App() {
                     <span>MULTI DISCIPLINARY VISUAL CREATOR</span>
                   </div>
                   <h1
-                    // COMPRESSED: text-4xl sm:text-5xl -> text-3xl sm:text-5xl
-                    className="font-display text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.08]"
+                    className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.08]"
                     style={{ textWrap: 'balance' }}
                   >
                     Yashwanth Chelluboina
                   </h1>
-                  <p className="text-sm sm:text-lg text-zinc-300 leading-relaxed max-w-2xl">
+                  <p className="text-base sm:text-lg text-zinc-300 leading-relaxed max-w-2xl">
                     I bridge structured <span className="text-white font-medium">AI prompt engineering</span>,
                     narrative <span className="text-white font-medium">video editing</span>, high-frequency{' '}
                     <span className="text-white font-medium">photo retouching</span>, and bold{' '}
@@ -566,8 +561,7 @@ export default function App() {
                     <div
                       role="tablist"
                       aria-label="Professional Roles"
-                      // COMPRESSED: gap-2.5 -> gap-2
-                      className="grid grid-cols-2 sm:grid-cols-4 gap-2"
+                      className="grid grid-cols-2 sm:grid-cols-4 gap-2.5"
                     >
                       {ROLE_SKILLS.map((skill) => {
                         const isSelected = skill.id === activeSkill.id;
@@ -579,7 +573,7 @@ export default function App() {
                             type="button"
                             onClick={() => setActiveSkillId(skill.id)}
                             onMouseEnter={() => setActiveSkillId(skill.id)}
-                            className={`text-left p-2 sm:p-3 rounded-xl border transition-all duration-150 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-400 ${
+                            className={`text-left p-3 rounded-xl border transition-all duration-150 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-400 ${
                               isSelected
                                 ? 'bg-violet-950/45 border-violet-500/70 text-white shadow-lg shadow-violet-950/30 -translate-y-0.5'
                                 : 'bg-[#0c0c14] border-white/10 text-zinc-300 hover:border-white/25 hover:text-white'
@@ -597,8 +591,7 @@ export default function App() {
                     </div>
                     <div
                       role="tabpanel"
-                      // COMPRESSED: p-4 sm:p-5 -> p-3 sm:p-5
-                      className="p-3 sm:p-5 rounded-xl bg-[#0c0c15] border border-white/10 space-y-2"
+                      className="p-4 sm:p-5 rounded-xl bg-[#0c0c15] border border-white/10 space-y-2.5"
                     >
                       <div className="flex items-center justify-between gap-4">
                         <h2 className="font-display text-sm sm:text-base font-semibold text-violet-200">
@@ -646,8 +639,7 @@ export default function App() {
                   className="lg:col-span-5 flex flex-col justify-center"
                 >
                   <div 
-                    // COMPRESSED: h-full min-h-[360px] -> h-[22vh] min-h-[160px] sm:min-h-[430px] sm:h-full to keep it from causing mobile scroll
-                    className="group relative w-full h-[22vh] min-h-[160px] sm:h-full sm:min-h-[430px] rounded-2xl overflow-hidden bg-[#0b0b14] border border-white/12 shadow-2xl flex flex-col justify-between p-5 sm:p-8"
+                    className="group relative w-full h-full min-h-[360px] sm:min-h-[430px] rounded-2xl overflow-hidden bg-[#0b0b14] border border-white/12 shadow-2xl flex flex-col justify-between p-6 sm:p-8"
                     onMouseEnter={() => setIsPaused(true)}
                     onMouseLeave={() => setIsPaused(false)}
                   >
@@ -688,11 +680,11 @@ export default function App() {
                           </>
                         )}
 
-                        <div className="relative z-10 mt-auto pt-24 sm:pt-48 pointer-events-none">
-                          <p className="font-mono text-[10px] sm:text-xs text-violet-300">
+                        <div className="relative z-10 mt-auto pt-48 pointer-events-none">
+                          <p className="font-mono text-xs text-violet-300">
                             CREATIVE DIRECTOR & EDITOR
                           </p>
-                          <p className="font-display text-lg sm:text-xl font-bold text-white">
+                          <p className="font-display text-xl font-bold text-white">
                             Yashwanth Chelluboina
                           </p>
                         </div>
