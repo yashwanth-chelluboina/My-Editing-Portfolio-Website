@@ -1,203 +1,59 @@
 # 🎬 Yashwanth Edits — Cinematic 3D Portfolio
 
-A cinematic, interactive 3D portfolio showcasing video editing, photo editing, and graphic design through an immersive MacBook Pro experience.
+**An immersive creative portfolio by Yashwanth Chelluboina.**
 
-**Built with:** React · TypeScript · Three.js · GSAP · Tailwind CSS
+A cinematic, interactive portfolio that brings creativity and technology together through a realistic 3D MacBook Pro experience. Designed to showcase my work in video editing, photo editing, and graphic design through smooth animations, immersive visuals, and a modern digital experience.
 
----
-
-## ✨ Features
-
-- **Interactive 3D MacBook Pro** — Detailed Space Black laptop with a realistic opening animation.
-- **Scroll-Driven Animation** — Control the laptop lid and camera movement by scrolling.
-- **Cinematic Screen Zoom** — Transition seamlessly from the laptop display into the portfolio.
-- **Smooth Website Reveal** — Content appears only after the intro animation completes.
-- **Creative Project Gallery** — Showcase video editing, photo editing, and graphic design.
-- **Showreel Section** — Feature your best video editing work.
-- **Responsive Design** — Adapt the portfolio to different screen sizes.
-- **Customizable Media** — Easily replace portraits, logos, thumbnails, and videos.
-- **Optimized 3D Experience** — Built with Three.js and GSAP animations.
+🌐 **Live Website:** [yashwanth-edits.vercel.app](https://yashwanth-edits.vercel.app/)
 
 ---
 
-## 🚀 Portfolio Experience
+## ✨ About the Portfolio
 
-The opening sequence follows four stages:
+Yashwanth Edits is a creative portfolio built to present my editing projects in a unique and cinematic way. Instead of a conventional landing page, visitors experience an interactive 3D MacBook Pro that opens with scrolling and transitions into the portfolio.
 
-| Stage | Experience |
+The website combines realistic 3D modeling, scroll-driven animation, and a clean visual interface to create an engaging experience that reflects my creative style.
+
+## 🚀 Key Features
+
+- **Interactive 3D MacBook Pro** — A detailed laptop model with a cinematic opening animation.
+- **Scroll-Driven Experience** — Smooth, scroll-controlled laptop movements and camera transitions.
+- **Cinematic Screen Transition** — A camera zoom into the laptop display reveals the portfolio.
+- **Video Editing** — A dedicated space to showcase video projects and creative edits.
+- **Photo Editing** — A gallery highlighting image manipulation and visual storytelling.
+- **Graphic Design** — Selected creative designs presented through an interactive project gallery.
+- **Showreel** — A dedicated section for showcasing video editing highlights.
+- **Modern UI & Animations** — Smooth transitions, polished visuals, and an immersive browsing experience.
+
+## 🎨 Creative Categories
+
+| Category | Focus |
 |---|---|
-| 01 | A closed 3D MacBook Pro in a dark studio |
-| 02 | The laptop opens as you scroll |
-| 03 | The camera zooms into the editing workspace |
-| 04 | The portfolio is revealed, followed by the main sections |
+| 🎬 Video Editing | Cinematic edits, storytelling, transitions, and visual effects |
+| 📸 Photo Editing | Image manipulation, retouching, and visual enhancement |
+| 🎨 Graphic Design | Creative compositions, visual concepts, and digital artwork |
 
----
+## 🛠️ Technologies Used
 
-## 🛠️ Tech Stack
+- **React** — Interactive user interface
+- **TypeScript** — Type-safe development
+- **Three.js** — Real-time 3D graphics
+- **GSAP & ScrollTrigger** — Scroll-based animations and transitions
+- **Tailwind CSS** — Modern styling and responsive layouts
+- **Vite** — Frontend development tooling
 
-| Technology | Purpose |
-|---|---|
-| React | User interface |
-| TypeScript | Type-safe development |
-| Three.js | 3D laptop and rendering |
-| GSAP & ScrollTrigger | Scroll-based animations |
-| Tailwind CSS | Styling and responsive layouts |
-| Vite | Development server and production builds |
+## 👨‍💻 About Me
 
----
+I'm **Yashwanth Chelluboina**, a creative enthusiast interested in video editing, photo manipulation, graphic design, and immersive digital experiences.
 
-## 📂 Project Structure
+Through Yashwanth Edits, I combine creative storytelling with modern web technologies to present my work in a distinctive way.
 
-```text
-Yashwanth-Edits/
-├── public/
-│   └── assets/
-│       ├── images/
-│       └── videos/
-├── src/
-│   ├── data/
-│   │   └── projects.ts
-│   ├── components/
-│   ├── sections/
-│   └── ...
-├── package.json
-├── index.html
-├── vite.config.ts
-└── README.md
-```
-
-*The structure above is illustrative; your actual folders may differ.*
-
----
-
-## ⚙️ Getting Started
-
-### Prerequisites
-
-- Node.js 18 or later
-- npm
-- Git
-
-### 1. Clone the Repository
-
-```bash
-git clone https://github.com/yashwanth-chelluboina/Yashwanth-Edits-Portfolio.git
-```
-
-```bash
-cd Yashwanth-Edits-Portfolio
-```
-
-### 2. Install Dependencies
-
-```bash
-npm install
-```
-
-### 3. Start the Development Server
-
-```bash
-npm run dev
-```
-
-Open the local URL displayed in your terminal.
-
-### 4. Build for Production
-
-```bash
-npm run build
-```
-
-To preview the production build locally:
-
-```bash
-npm run preview
-```
-
----
-
-## 🖼️ Customization Guide
-
-All main portfolio content and media are managed through:
-
-`src/data/projects.ts`
-
-### Profile & Branding
-
-Update the `SITE_ASSETS` object to customize your logo and portrait.
-
-```ts
-export const SITE_ASSETS = {
-  logoUrl: '/assets/logo.png',
-  portraitUrl: '/assets/portrait.jpg',
-};
-```
-
-Place your images inside `public/assets/`.
-
-### Project Gallery
-
-Edit the `PROJECTS` array to update the nine project slots.
-
-| Category | Project IDs |
-|---|---|
-| Video Editing | `video-01`, `video-02`, `video-03` |
-| Photo Editing | `photo-01`, `photo-02`, `photo-03` |
-| Graphic Designing | `design-01`, `design-02`, `design-03` |
-
-Update the project titles, descriptions, thumbnails, and media URLs.
-
-### Showreel
-
-Customize `showreelVideoUrl` and `showreelPosterUrl` in `SITE_ASSETS`.
-
-```ts
-showreelVideoUrl: '/assets/showreel.mp4',
-showreelPosterUrl: '/assets/showreel-poster.jpg',
-```
-
-Use valid local asset paths or supported HTTPS media URLs.
-
----
-
-## 🌐 Deployment
-
-Deploy the portfolio using Vercel or Netlify.
-
-### Vercel
-
-1. Import your GitHub repository into [Vercel](https://vercel.com/).
-2. Select **Vite** as the framework preset.
-3. Set the build command to `npm run build`.
-4. Set the output directory to `dist`.
-5. Deploy your project.
-
-### Netlify
-
-1. Import your GitHub repository into [Netlify](https://www.netlify.com/).
-2. Set the build command to `npm run build`.
-3. Set the publish directory to `dist`.
-4. Deploy your project.
-
----
-
-## 🔐 Environment Variables
-
-No API keys or paid external services are required for the default portfolio experience, provided the project does not introduce additional services or dependencies.
-
----
-
-## 👨‍💻 About
-
-**Yashwanth Chelluboina**
-
-Creative portfolio focused on cinematic video editing, photo manipulation, graphic design, and immersive web experiences.
-
-- **GitHub:** [@yashwanth-chelluboina](https://github.com/yashwanth-chelluboina)
-- **Portfolio:** Add your deployed website URL here.
+- 🌐 **Portfolio:** [Visit Website](https://yashwanth-edits.vercel.app/)
+- 💻 **GitHub:** [yashwanth-chelluboina](https://github.com/yashwanth-chelluboina)
 
 ---
 
 <p align="center">
-  Made with ❤️ by Yashwanth Chelluboina
+  <b>Yashwanth Edits</b><br>
+  Turning creativity into cinematic experiences. ✨
 </p>
