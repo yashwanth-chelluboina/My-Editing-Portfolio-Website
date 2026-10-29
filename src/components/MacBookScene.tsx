@@ -39,6 +39,7 @@ const OPEN_ANGLE_RAD = THREE.MathUtils.degToRad(OPEN_ANGLE_DEG);
 const SCREEN_CENTER_DIST = 1.22;
 const HINGE_Y = 0.145;
 const HINGE_Z = -1.18;
+
 const SCREEN_WORLD_Y = HINGE_Y + SCREEN_CENTER_DIST * Math.sin(OPEN_ANGLE_RAD);
 const SCREEN_WORLD_Z = HINGE_Z + SCREEN_CENTER_DIST * Math.cos(OPEN_ANGLE_RAD);
 const SCREEN_NORMAL_Y = Math.sin(OPEN_ANGLE_RAD - Math.PI / 2);
@@ -181,6 +182,7 @@ export const MacBookScene: React.FC<MacBookSceneProps> = ({ animRefs, onSceneRea
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0x050508);
     scene.fog = new THREE.FogExp2(0x050508, 0.062);
+
     const pmremGenerator = new THREE.PMREMGenerator(renderer);
     scene.environment = pmremGenerator.fromScene(new RoomEnvironment(), 0.04).texture;
     pmremGenerator.dispose();
@@ -242,6 +244,7 @@ export const MacBookScene: React.FC<MacBookSceneProps> = ({ animRefs, onSceneRea
 
     // 6. Dark Studio Floor & Grounded Contact Shadow
     const disposables: { dispose: () => void }[] = [];
+
     const floorGeo = new THREE.PlaneGeometry(36, 36);
     const floorMat = new THREE.MeshStandardMaterial({
       color: 0x07070c,
@@ -379,6 +382,7 @@ export const MacBookScene: React.FC<MacBookSceneProps> = ({ animRefs, onSceneRea
       const foot = new THREE.Mesh(footGeo, bezelMat);
       foot.position.set(fx, fy, fz);
       macbookGroup.add(foot);
+
       const rim = new THREE.Mesh(footRimGeo, machinedEdgeMat);
       rim.position.set(fx, fy + 0.01, fz);
       macbookGroup.add(rim);
@@ -417,6 +421,7 @@ export const MacBookScene: React.FC<MacBookSceneProps> = ({ animRefs, onSceneRea
     const lipNotchMesh = new THREE.Mesh(lipNotchGeo, darkWellMat);
     lipNotchMesh.position.set(0, BASE_H + 0.028, CHASSIS_D / 2 + 0.004);
     macbookGroup.add(lipNotchMesh);
+
     const lipHighlightGeo = new THREE.BoxGeometry(0.62, 0.004, 0.012);
     const lipHighlightMesh = new THREE.Mesh(lipHighlightGeo, machinedEdgeMat);
     lipHighlightMesh.position.set(0, BASE_H + 0.012, CHASSIS_D / 2 + 0.015);
@@ -463,15 +468,18 @@ export const MacBookScene: React.FC<MacBookSceneProps> = ({ animRefs, onSceneRea
     // Right Flank: HDMI + 1x Thunderbolt 4 (USB-C) + SDXC Card Reader Slot
     const hdmiGeo = new THREE.BoxGeometry(0.022, 0.032, 0.15);
     const sdxcGeo = new THREE.BoxGeometry(0.022, 0.014, 0.28);
+
     const hdmiMesh = new THREE.Mesh(hdmiGeo, portInteriorMat);
     hdmiMesh.position.set(rightX, portY, -0.78);
     macbookGroup.add(hdmiMesh);
+
     const rightUsbc = new THREE.Mesh(usbcOuterGeo, portInteriorMat);
     rightUsbc.position.set(rightX, portY, -0.52);
     macbookGroup.add(rightUsbc);
     const rightTongue = new THREE.Mesh(usbcTongueGeo, machinedEdgeMat);
     rightTongue.position.set(rightX, portY, -0.52);
     macbookGroup.add(rightTongue);
+
     const sdxcMesh = new THREE.Mesh(sdxcGeo, portInteriorMat);
     sdxcMesh.position.set(rightX, portY, -0.2);
     macbookGroup.add(sdxcMesh);
@@ -526,6 +534,7 @@ export const MacBookScene: React.FC<MacBookSceneProps> = ({ animRefs, onSceneRea
     const keyBodiesMesh = new THREE.Mesh(keyBodiesGeo, keyBodyMat);
     keyBodiesMesh.position.set(0, DECK_Y + 0.0025, 0);
     macbookGroup.add(keyBodiesMesh);
+
     const keyTopsMesh = new THREE.Mesh(keyTopsGeo, keyTopsMat);
     keyTopsMesh.position.set(0, DECK_Y + 0.004, 0);
     macbookGroup.add(keyTopsMesh);
@@ -664,6 +673,7 @@ export const MacBookScene: React.FC<MacBookSceneProps> = ({ animRefs, onSceneRea
     // Part 12: Liquid Retina Display Surface (Positioned at y = -0.004 with polygonOffset so it NEVER Z-fights or flickers!)
     const nleScreen = createNLEScreenController(renderer);
     disposables.push(nleScreen);
+
     let customScreenImg: HTMLImageElement | null = null;
     if (SITE_ASSETS.laptopScreenPreviewUrl) {
       const img = new Image();
@@ -702,6 +712,7 @@ export const MacBookScene: React.FC<MacBookSceneProps> = ({ animRefs, onSceneRea
     notchBezelMesh.rotation.x = Math.PI / 2;
     notchBezelMesh.position.set(0, -0.008, notchZ);
     hingePivotGroup.add(notchBezelMesh);
+
     const camLensGeo = new THREE.CircleGeometry(0.016, 16);
     const camLensMat = new THREE.MeshBasicMaterial({
       color: 0x0f172a,
@@ -761,6 +772,7 @@ export const MacBookScene: React.FC<MacBookSceneProps> = ({ animRefs, onSceneRea
       // This removes the "lagging behind the scroll" feeling without snapping.
       const openDamp = 1 - Math.exp(-(isSoftwareGl ? 30 : 26) * delta);
       const zoomDamp = 1 - Math.exp(-(isSoftwareGl ? 20 : 18) * delta);
+
       currentOpen = THREE.MathUtils.lerp(currentOpen, targetOpen, openDamp);
       currentZoom = THREE.MathUtils.lerp(currentZoom, targetZoom, zoomDamp);
 
@@ -775,6 +787,7 @@ export const MacBookScene: React.FC<MacBookSceneProps> = ({ animRefs, onSceneRea
       const zoomDim = 1 - THREE.MathUtils.smoothstep(currentZoom, 0.72, 0.99) * 0.92;
       const finalBright = openBright * zoomDim;
       screenMat.color.setScalar(finalBright);
+
       nleScreen.update(currentOpen, currentZoom, 0.18, customScreenImg);
 
       // 3. Coordinate Camera Transitions across Stage 1 (Opening) and Stage 2 (Zoom)
@@ -797,17 +810,34 @@ export const MacBookScene: React.FC<MacBookSceneProps> = ({ animRefs, onSceneRea
       // capped software rendering at very low FPS and made the lid appear to stutter.
       frameId = window.requestAnimationFrame(tick);
     }
-
     frameId = window.requestAnimationFrame(tick);
 
+    // ========================================================================
+    // RESIZE HANDLER (UPDATED FOR RESPONSIVE FOV)
+    // ========================================================================
     const handleResize = () => {
       if (!container) return;
       const w = container.clientWidth || window.innerWidth;
       const h = container.clientHeight || window.innerHeight;
       camera.aspect = w / h;
+      
+      // ADDED: Dynamic FOV based on screen aspect ratio to keep laptop fully in view on mobile
+      if (camera.aspect < 0.6) {
+        camera.fov = 75; // Tall phones
+      } else if (camera.aspect < 0.8) {
+        camera.fov = 60; // Wide phones / tablets
+      } else if (camera.aspect < 1.1) {
+        camera.fov = 50; // iPads / smaller screens
+      } else {
+        camera.fov = 38; // Default desktop landscape
+      }
+      
       camera.updateProjectionMatrix();
       renderer.setSize(w, h);
     };
+    
+    // Call handleResize immediately to set correct initial FOV based on screen size
+    handleResize();
 
     const handleVisibilityChange = () => {
       isTabHidden = document.hidden;
