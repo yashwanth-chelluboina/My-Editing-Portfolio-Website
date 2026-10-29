@@ -25,7 +25,7 @@ export const SITE_ASSETS = {
   
   // REPLACE: Add your hosted 16:9 Showreel MP4/WebM video URL here (e.g. "https://.../showreel.mp4").
   // When empty "", the Showreel video player runs a real playable 60fps procedural showreel stream.
-  showreelVideoUrl: '/videos/showreel.mp4',
+  showreelVideoUrl: 'https://www.youtube.com/embed/1dvIWhhsJJU',
   
   // REPLACE: Add your custom Showreel poster/thumbnail image URL here (e.g. "/assets/showreel-poster.jpg").
   showreelPosterUrl: '/images/Thumbnail.png',
@@ -182,7 +182,7 @@ export const PROJECTS: PortfolioProject[] = [
     // REPLACE: Add your video thumbnail image URL here.
     thumbnailUrl: '/images/Shoe.jpg',
     // REPLACE: Add your actual project video URL here (e.g. "/assets/videos/project-01.mp4").
-    videoUrl: '/videos/Nike Shoe.mp4',
+    videoUrl: 'https://www.youtube.com/embed/GeIqle91New',
   },
   {
     id: 'video-02',
@@ -200,7 +200,7 @@ export const PROJECTS: PortfolioProject[] = [
     // REPLACE: Add your video thumbnail image URL here.
     thumbnailUrl: '/images/F1.png',
     // REPLACE: Add your actual project video URL here (e.g. "/assets/videos/project-02.mp4").
-    videoUrl: '/videos/Formula 1.mp4',
+    videoUrl: 'https://www.youtube.com/embed/34hVco2rqC4',
   },
   {
     id: 'video-03',
@@ -218,7 +218,7 @@ export const PROJECTS: PortfolioProject[] = [
     // REPLACE: Add your video thumbnail image URL here.
     thumbnailUrl: '/images/Intro thumbnail.png',
     // REPLACE: Add your actual project video URL here (e.g. "/assets/videos/project-03.mp4").
-    videoUrl: '/videos/Movie Intro.mp4',
+    videoUrl: 'https://www.youtube.com/embed/zWfLKm5w7m8',
   },
 
   // ==========================================================================

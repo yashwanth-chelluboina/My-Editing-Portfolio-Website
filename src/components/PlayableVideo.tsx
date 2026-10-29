@@ -41,6 +41,17 @@ export const PlayableVideo: React.FC<PlayableVideoProps> = ({
   const [duration, setDuration] = useState(isShowreel ? 30 : 16);
 
   const hasExternalVideo = Boolean(videoUrl && videoUrl.trim().length > 0);
+  const isYouTubeVideo = Boolean(
+  videoUrl &&
+    (videoUrl.includes('youtube.com/embed/') ||
+      videoUrl.includes('youtu.be/') ||
+      videoUrl.includes('youtube.com/shorts/'))
+);
+
+const youtubeEmbedUrl = videoUrl
+  ? videoUrl.replace('youtu.be/', 'www.youtube.com/embed/')
+      .replace('youtube.com/shorts/', 'www.youtube.com/embed/')
+  : '';
   const resolvedPoster =
     posterUrl && posterUrl.trim().length > 0
       ? posterUrl
@@ -188,7 +199,32 @@ export const PlayableVideo: React.FC<PlayableVideoProps> = ({
     const s = Math.floor(sec % 60);
     return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
   };
-
+if (isYouTubeVideo) {
+  return (
+    <div
+      ref={containerRef}
+      className="group relative w-full overflow-hidden rounded-2xl border border-white/10 bg-[#07070c] shadow-2xl"
+    >
+      <div
+        className={`relative w-full ${
+          videoUrl?.includes('/embed/GeIqle91New')
+            ? 'mx-auto max-w-[420px] aspect-[9/16]'
+            : 'aspect-video'
+        }`}
+      >
+        <iframe
+          src={youtubeEmbedUrl}
+          title={title}
+          className="absolute inset-0 h-full w-full"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowFullScreen
+          loading="lazy"
+          referrerPolicy="strict-origin-when-cross-origin"
+        />
+      </div>
+    </div>
+  );
+}
   return (
     <div
       ref={containerRef}
