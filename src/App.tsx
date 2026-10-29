@@ -348,7 +348,7 @@ export default function App() {
         />
       </div>
 
-      <header className="fixed top-0 left-0 right-0 z-40 flex items-center justify-between gap-2 sm:gap-8 px-3 sm:px-8 lg:px-12 h-14 sm:h-16 bg-[#050508]/95 border-b border-white/10">
+      <header className="fixed top-0 left-0 right-0 z-40 flex items-center justify-between gap-8 px-5 sm:px-8 lg:px-12 h-16 bg-[#050508]/95 border-b border-white/10">
         {/* Zone 1: Single Brand Wordmark / Logo */}
         <a
           href="#top-studio"
@@ -356,14 +356,14 @@ export default function App() {
             e.preventDefault();
             scrollToSection('top-studio');
           }}
-          className="font-display text-base sm:text-xl font-bold tracking-tight text-white hover:text-violet-300 transition-colors whitespace-nowrap shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-400 rounded flex items-center gap-2 sm:gap-3 min-w-0"
+          className="font-display text-lg sm:text-xl font-bold tracking-tight text-white hover:text-violet-300 transition-colors whitespace-nowrap shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-400 rounded flex items-center gap-3"
         >
           {SITE_ASSETS.logoUrl && SITE_ASSETS.logoUrl.trim().length > 0 && (
             <img
               src={SITE_ASSETS.logoUrl}
               alt="Yashwanth Edits Logo"
               referrerPolicy="no-referrer"
-              className="h-7 sm:h-8 w-auto object-contain shrink-0"
+              className="h-8 w-auto object-contain"
             />
           )}
           <span>Yashwanth Edits</span>
@@ -424,7 +424,7 @@ export default function App() {
               e.preventDefault();
               scrollToSection('contact');
             }}
-            className="px-3 sm:px-4 py-2 text-xs sm:text-sm font-semibold text-white bg-violet-600 hover:bg-violet-500 rounded-lg transition-colors whitespace-nowrap shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-400"
+            className="px-4 py-2 text-xs sm:text-sm font-semibold text-white bg-violet-600 hover:bg-violet-500 rounded-lg transition-colors whitespace-nowrap shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-400"
           >
             Let&apos;s Talk
           </a>
@@ -527,13 +527,17 @@ export default function App() {
               visibility: 'hidden',
               pointerEvents: 'none',
             }}
-            className="relative z-20 w-full h-full flex items-center justify-center pt-16 sm:pt-14 pb-2 px-3 sm:px-8 lg:px-12 overflow-hidden"
+            // ADDED: overflow-hidden to stop nested scrollbars, reduced vertical paddings
+            className="relative z-20 w-full h-full flex items-center justify-center pt-20 pb-4 px-5 sm:px-8 lg:px-12 overflow-hidden"
           >
-            <div className="w-full max-w-7xl mx-auto h-full min-h-0 flex flex-col justify-center">
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-2 sm:gap-8 lg:gap-12 items-center min-h-0">
+            {/* ADDED: h-full flex flex-col justify-center to constraint within mobile viewports */}
+            <div className="w-full max-w-7xl mx-auto h-full flex flex-col justify-center">
+              {/* COMPRESSED: gap-8 -> gap-4 sm:gap-8 lg:gap-12 */}
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-8 lg:gap-12 items-center">
                 <div
                   ref={heroHeadlineRef}
-                  className="lg:col-span-7 flex flex-col justify-center space-y-2 sm:space-y-4 lg:space-y-6 min-w-0"
+                  // COMPRESSED: space-y-6 -> space-y-4 lg:space-y-6
+                  className="lg:col-span-7 flex flex-col justify-center space-y-4 lg:space-y-6"
                 >
                   <div className="flex items-center gap-2 text-xs font-mono tracking-widest text-violet-400">
                     <span>WHO AM I?</span>
@@ -541,12 +545,13 @@ export default function App() {
                     <span>MULTI DISCIPLINARY VISUAL CREATOR</span>
                   </div>
                   <h1
-                    className="font-display text-2xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight sm:leading-none"
+                    // COMPRESSED: text-4xl sm:text-5xl -> text-3xl sm:text-5xl
+                    className="font-display text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.08]"
                     style={{ textWrap: 'balance' }}
                   >
                     Yashwanth Chelluboina
                   </h1>
-                  <p className="text-xs sm:text-lg text-zinc-300 leading-relaxed max-w-2xl">
+                  <p className="text-sm sm:text-lg text-zinc-300 leading-relaxed max-w-2xl">
                     I bridge structured <span className="text-white font-medium">AI prompt engineering</span>,
                     narrative <span className="text-white font-medium">video editing</span>, high-frequency{' '}
                     <span className="text-white font-medium">photo retouching</span>, and bold{' '}
@@ -554,14 +559,15 @@ export default function App() {
                     to final color grade, I turn raw ideas into cohesive, cinema-grade visual stories.
                   </p>
 
-                  <div className="space-y-1.5 sm:space-y-3 pt-0.5 sm:pt-1">
-                    <p className="font-mono text-[10px] sm:text-xs text-zinc-400">
+                  <div className="space-y-3 pt-1">
+                    <p className="font-mono text-xs text-zinc-400">
                       SELECT A CORE DISCIPLINE TO INSPECT WORKFLOW
                     </p>
                     <div
                       role="tablist"
                       aria-label="Professional Roles"
-                      className="grid grid-cols-2 sm:grid-cols-4 gap-1.5 sm:gap-2"
+                      // COMPRESSED: gap-2.5 -> gap-2
+                      className="grid grid-cols-2 sm:grid-cols-4 gap-2"
                     >
                       {ROLE_SKILLS.map((skill) => {
                         const isSelected = skill.id === activeSkill.id;
@@ -591,7 +597,8 @@ export default function App() {
                     </div>
                     <div
                       role="tabpanel"
-                      className="p-2.5 sm:p-5 rounded-xl bg-[#0c0c15] border border-white/10 space-y-1 sm:space-y-2"
+                      // COMPRESSED: p-4 sm:p-5 -> p-3 sm:p-5
+                      className="p-3 sm:p-5 rounded-xl bg-[#0c0c15] border border-white/10 space-y-2"
                     >
                       <div className="flex items-center justify-between gap-4">
                         <h2 className="font-display text-sm sm:text-base font-semibold text-violet-200">
@@ -601,10 +608,10 @@ export default function App() {
                           {activeSkill.shortCode}
                         </span>
                       </div>
-                      <p className="text-[11px] sm:text-sm text-zinc-300 leading-snug sm:leading-relaxed">
+                      <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed">
                         {activeSkill.summary}
                       </p>
-                      <div className="pt-0.5 sm:pt-1 flex flex-wrap items-center gap-x-2 sm:gap-x-3 gap-y-1 text-[10px] sm:text-xs font-mono text-zinc-400">
+                      <div className="pt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs font-mono text-zinc-400">
                         {activeSkill.highlights.map((item, idx) => (
                           <React.Fragment key={item}>
                             {idx > 0 && <span aria-hidden="true"> </span>}
@@ -615,18 +622,18 @@ export default function App() {
                     </div>
                   </div>
 
-                  <div className="flex flex-wrap items-center gap-2 sm:gap-4 pt-1 sm:pt-2">
+                  <div className="flex flex-wrap items-center gap-4 pt-2">
                     <button
                       type="button"
                       onClick={() => scrollToSection('work')}
-                      className="px-3 sm:px-6 py-2.5 sm:py-3 rounded-xl bg-violet-600 hover:bg-violet-500 text-xs sm:text-sm font-semibold text-white transition-colors whitespace-nowrap shrink-0 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-400"
+                      className="px-6 py-3 rounded-xl bg-violet-600 hover:bg-violet-500 text-sm font-semibold text-white transition-colors whitespace-nowrap shrink-0 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-400"
                     >
                       Explore 9 Creative Works
                     </button>
                     <button
                       type="button"
                       onClick={() => scrollToSection('showreel')}
-                      className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2.5 sm:py-3 rounded-xl bg-white/8 hover:bg-white/14 border border-white/12 text-xs sm:text-sm font-medium text-zinc-200 hover:text-white transition-colors whitespace-nowrap shrink-0 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-400"
+                      className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-white/8 hover:bg-white/14 border border-white/12 text-sm font-medium text-zinc-200 hover:text-white transition-colors whitespace-nowrap shrink-0 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-400"
                     >
                       <Play className="w-4 h-4 text-violet-400" />
                       <span>Watch Showreel</span>
@@ -636,10 +643,11 @@ export default function App() {
 
                 <div
                   ref={heroPortraitRef}
-                  className="lg:col-span-5 flex flex-col justify-center min-w-0"
+                  className="lg:col-span-5 flex flex-col justify-center"
                 >
                   <div 
-                    className="group relative w-full aspect-[4/5] min-w-0 rounded-2xl overflow-hidden bg-[#0b0b14] border border-white/12 shadow-2xl flex flex-col justify-between p-3 sm:p-8"
+                    // COMPRESSED: h-full min-h-[360px] -> h-[22vh] min-h-[160px] sm:min-h-[430px] sm:h-full to keep it from causing mobile scroll
+                    className="group relative w-full h-[22vh] min-h-[160px] sm:h-full sm:min-h-[430px] rounded-2xl overflow-hidden bg-[#0b0b14] border border-white/12 shadow-2xl flex flex-col justify-between p-5 sm:p-8"
                     onMouseEnter={() => setIsPaused(true)}
                     onMouseLeave={() => setIsPaused(false)}
                   >
@@ -680,11 +688,11 @@ export default function App() {
                           </>
                         )}
 
-                        <div className="relative z-10 mt-auto pt-10 sm:pt-48 pointer-events-none">
-                          <p className="font-mono text-[9px] sm:text-xs text-violet-300">
+                        <div className="relative z-10 mt-auto pt-24 sm:pt-48 pointer-events-none">
+                          <p className="font-mono text-[10px] sm:text-xs text-violet-300">
                             CREATIVE DIRECTOR & EDITOR
                           </p>
-                          <p className="font-display text-sm sm:text-xl font-bold text-white">
+                          <p className="font-display text-lg sm:text-xl font-bold text-white">
                             Yashwanth Chelluboina
                           </p>
                         </div>
@@ -883,6 +891,7 @@ export default function App() {
                     className="project-card group bg-[#0b0b14] border border-white/10 hover:border-violet-500/50 rounded-2xl overflow-hidden flex flex-col justify-between transition-all duration-200 hover:-translate-y-1 shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-400 cursor-pointer"
                   >
                     <div>
+                      {/* APPLIED MODIFICATION HERE: object-contain with heavy magnifying zoom effect */}
                       <div className="relative w-full overflow-hidden bg-[#06060b] flex items-center justify-center">
                         <img
                           src={resolvedThumb}
