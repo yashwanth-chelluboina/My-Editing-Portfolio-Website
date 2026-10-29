@@ -348,7 +348,7 @@ export default function App() {
         />
       </div>
 
-      <header className="fixed top-0 left-0 right-0 z-40 flex items-center justify-between gap-8 px-5 sm:px-8 lg:px-12 h-16 bg-[#050508]/95 border-b border-white/10">
+      <header className="fixed top-0 left-0 right-0 z-40 flex items-center justify-between gap-2 sm:gap-8 px-3 sm:px-8 lg:px-12 h-14 sm:h-16 bg-[#050508]/95 border-b border-white/10">
         {/* Zone 1: Single Brand Wordmark / Logo */}
         <a
           href="#top-studio"
@@ -356,14 +356,14 @@ export default function App() {
             e.preventDefault();
             scrollToSection('top-studio');
           }}
-          className="font-display text-lg sm:text-xl font-bold tracking-tight text-white hover:text-violet-300 transition-colors whitespace-nowrap shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-400 rounded flex items-center gap-3"
+          className="font-display text-base sm:text-xl font-bold tracking-tight text-white hover:text-violet-300 transition-colors whitespace-nowrap shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-400 rounded flex items-center gap-2 sm:gap-3 min-w-0"
         >
           {SITE_ASSETS.logoUrl && SITE_ASSETS.logoUrl.trim().length > 0 && (
             <img
               src={SITE_ASSETS.logoUrl}
               alt="Yashwanth Edits Logo"
               referrerPolicy="no-referrer"
-              className="h-8 w-auto object-contain"
+              className="h-7 sm:h-8 w-auto object-contain shrink-0"
             />
           )}
           <span>Yashwanth Edits</span>
@@ -424,7 +424,7 @@ export default function App() {
               e.preventDefault();
               scrollToSection('contact');
             }}
-            className="px-4 py-2 text-xs sm:text-sm font-semibold text-white bg-violet-600 hover:bg-violet-500 rounded-lg transition-colors whitespace-nowrap shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-400"
+            className="px-3 sm:px-4 py-2 text-xs sm:text-sm font-semibold text-white bg-violet-600 hover:bg-violet-500 rounded-lg transition-colors whitespace-nowrap shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-400"
           >
             Let&apos;s Talk
           </a>
@@ -518,7 +518,6 @@ export default function App() {
             )}
           </div>
 
-          {/* DYNAMIC FLEXBOX SECTION - No internal scrollbars, scales properly on all devices */}
           <section
             id="who-am-i"
             ref={heroOverlayRef}
@@ -528,28 +527,26 @@ export default function App() {
               visibility: 'hidden',
               pointerEvents: 'none',
             }}
-            className="absolute inset-0 z-20 w-full h-full flex flex-col pt-16 px-4 sm:px-8 lg:px-12 overflow-hidden"
+            className="relative z-20 w-full h-full flex items-center justify-center pt-16 sm:pt-14 pb-2 px-3 sm:px-8 lg:px-12 overflow-hidden"
           >
-            <div className="flex-1 w-full max-w-7xl mx-auto flex flex-col justify-center min-h-0">
-              <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3 sm:gap-6 lg:gap-12 h-full min-h-0 py-3 sm:py-6">
-                
-                {/* TEXT COLUMN - Compressed text sizing on mobile */}
+            <div className="w-full max-w-7xl mx-auto h-full min-h-0 flex flex-col justify-center">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-2 sm:gap-8 lg:gap-12 items-center min-h-0">
                 <div
                   ref={heroHeadlineRef}
-                  className="w-full lg:w-[55%] flex flex-col justify-center space-y-2 sm:space-y-4 lg:space-y-6 shrink-0"
+                  className="lg:col-span-7 flex flex-col justify-center space-y-2 sm:space-y-4 lg:space-y-6 min-w-0"
                 >
-                  <div className="flex items-center gap-2 text-[10px] sm:text-xs font-mono tracking-widest text-violet-400">
+                  <div className="flex items-center gap-2 text-xs font-mono tracking-widest text-violet-400">
                     <span>WHO AM I?</span>
                     <span aria-hidden="true"> </span>
                     <span>MULTI DISCIPLINARY VISUAL CREATOR</span>
                   </div>
                   <h1
-                    className="font-display text-3xl sm:text-4xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.05]"
+                    className="font-display text-2xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight sm:leading-none"
                     style={{ textWrap: 'balance' }}
                   >
                     Yashwanth Chelluboina
                   </h1>
-                  <p className="text-xs sm:text-sm lg:text-lg text-zinc-300 leading-relaxed max-w-2xl">
+                  <p className="text-xs sm:text-lg text-zinc-300 leading-relaxed max-w-2xl">
                     I bridge structured <span className="text-white font-medium">AI prompt engineering</span>,
                     narrative <span className="text-white font-medium">video editing</span>, high-frequency{' '}
                     <span className="text-white font-medium">photo retouching</span>, and bold{' '}
@@ -557,14 +554,14 @@ export default function App() {
                     to final color grade, I turn raw ideas into cohesive, cinema-grade visual stories.
                   </p>
 
-                  <div className="space-y-2 sm:space-y-3 pt-1">
+                  <div className="space-y-1.5 sm:space-y-3 pt-0.5 sm:pt-1">
                     <p className="font-mono text-[10px] sm:text-xs text-zinc-400">
                       SELECT A CORE DISCIPLINE TO INSPECT WORKFLOW
                     </p>
                     <div
                       role="tablist"
                       aria-label="Professional Roles"
-                      className="grid grid-cols-2 sm:grid-cols-4 gap-1.5 sm:gap-2.5"
+                      className="grid grid-cols-2 sm:grid-cols-4 gap-1.5 sm:gap-2"
                     >
                       {ROLE_SKILLS.map((skill) => {
                         const isSelected = skill.id === activeSkill.id;
@@ -582,7 +579,7 @@ export default function App() {
                                 : 'bg-[#0c0c14] border-white/10 text-zinc-300 hover:border-white/25 hover:text-white'
                             }`}
                           >
-                            <span className="block font-mono text-[9px] sm:text-[10px] text-violet-300">
+                            <span className="block font-mono text-[10px] text-violet-300">
                               {skill.shortCode}
                             </span>
                             <span className="mt-1 block font-display text-xs sm:text-sm font-semibold whitespace-nowrap truncate">
@@ -594,20 +591,20 @@ export default function App() {
                     </div>
                     <div
                       role="tabpanel"
-                      className="p-3 sm:p-5 rounded-xl bg-[#0c0c15] border border-white/10 space-y-1.5 sm:space-y-2.5"
+                      className="p-2.5 sm:p-5 rounded-xl bg-[#0c0c15] border border-white/10 space-y-1 sm:space-y-2"
                     >
                       <div className="flex items-center justify-between gap-4">
-                        <h2 className="font-display text-xs sm:text-sm lg:text-base font-semibold text-violet-200">
+                        <h2 className="font-display text-sm sm:text-base font-semibold text-violet-200">
                           {activeSkill.title}
                         </h2>
-                        <span className="font-mono text-[10px] sm:text-xs text-zinc-400">
+                        <span className="font-mono text-xs text-zinc-400">
                           {activeSkill.shortCode}
                         </span>
                       </div>
-                      <p className="text-[11px] sm:text-sm text-zinc-300 leading-relaxed">
+                      <p className="text-[11px] sm:text-sm text-zinc-300 leading-snug sm:leading-relaxed">
                         {activeSkill.summary}
                       </p>
-                      <div className="pt-0.5 flex flex-wrap items-center gap-x-2 sm:gap-x-3 gap-y-1 text-[10px] sm:text-xs font-mono text-zinc-400">
+                      <div className="pt-0.5 sm:pt-1 flex flex-wrap items-center gap-x-2 sm:gap-x-3 gap-y-1 text-[10px] sm:text-xs font-mono text-zinc-400">
                         {activeSkill.highlights.map((item, idx) => (
                           <React.Fragment key={item}>
                             {idx > 0 && <span aria-hidden="true"> </span>}
@@ -622,28 +619,27 @@ export default function App() {
                     <button
                       type="button"
                       onClick={() => scrollToSection('work')}
-                      className="px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl bg-violet-600 hover:bg-violet-500 text-xs sm:text-sm font-semibold text-white transition-colors whitespace-nowrap shrink-0 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-400"
+                      className="px-3 sm:px-6 py-2.5 sm:py-3 rounded-xl bg-violet-600 hover:bg-violet-500 text-xs sm:text-sm font-semibold text-white transition-colors whitespace-nowrap shrink-0 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-400"
                     >
                       Explore 9 Creative Works
                     </button>
                     <button
                       type="button"
                       onClick={() => scrollToSection('showreel')}
-                      className="inline-flex items-center gap-2 px-3 sm:px-5 py-2.5 sm:py-3 rounded-xl bg-white/8 hover:bg-white/14 border border-white/12 text-xs sm:text-sm font-medium text-zinc-200 hover:text-white transition-colors whitespace-nowrap shrink-0 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-400"
+                      className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2.5 sm:py-3 rounded-xl bg-white/8 hover:bg-white/14 border border-white/12 text-xs sm:text-sm font-medium text-zinc-200 hover:text-white transition-colors whitespace-nowrap shrink-0 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-400"
                     >
-                      <Play className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-violet-400" />
+                      <Play className="w-4 h-4 text-violet-400" />
                       <span>Watch Showreel</span>
                     </button>
                   </div>
                 </div>
 
-                {/* IMAGE COLUMN - Absorbs remaining height on mobile without causing overflow */}
                 <div
                   ref={heroPortraitRef}
-                  className="w-full lg:w-[45%] flex flex-col justify-center flex-1 min-h-[140px] lg:h-[80%] lg:min-h-[400px]"
+                  className="lg:col-span-5 flex flex-col justify-center min-w-0"
                 >
                   <div 
-                    className="group relative w-full h-full rounded-2xl overflow-hidden bg-[#0b0b14] border border-white/12 shadow-2xl flex flex-col justify-end p-4 sm:p-8"
+                    className="group relative w-full aspect-[4/5] min-w-0 rounded-2xl overflow-hidden bg-[#0b0b14] border border-white/12 shadow-2xl flex flex-col justify-between p-3 sm:p-8"
                     onMouseEnter={() => setIsPaused(true)}
                     onMouseLeave={() => setIsPaused(false)}
                   >
@@ -655,8 +651,7 @@ export default function App() {
                             src={src}
                             alt={`Yashwanth Chelluboina Portrait ${idx + 1}`}
                             referrerPolicy="no-referrer"
-                            // object-top on mobile prevents the head from getting chopped off if container is short
-                            className={`absolute inset-0 w-full h-full object-cover object-top lg:object-center transition-opacity duration-1000 ${
+                            className={`absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-1000 ${
                               idx === portraitIndex ? 'opacity-100' : 'opacity-0'
                             }`}
                           />
@@ -669,27 +664,27 @@ export default function App() {
                             <button
                               type="button"
                               onClick={handlePrevImage}
-                              className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-20 p-1.5 sm:p-2 rounded-full bg-black/40 hover:bg-violet-600 text-white opacity-0 group-hover:opacity-100 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-violet-400 cursor-pointer"
+                              className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-black/40 hover:bg-violet-600 text-white opacity-0 group-hover:opacity-100 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-violet-400 cursor-pointer"
                               aria-label="Previous image"
                             >
-                              <ChevronLeft className="w-4 h-4 sm:w-6 sm:h-6" />
+                              <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
                             </button>
                             <button
                               type="button"
                               onClick={handleNextImage}
-                              className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-20 p-1.5 sm:p-2 rounded-full bg-black/40 hover:bg-violet-600 text-white opacity-0 group-hover:opacity-100 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-violet-400 cursor-pointer"
+                              className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-black/40 hover:bg-violet-600 text-white opacity-0 group-hover:opacity-100 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-violet-400 cursor-pointer"
                               aria-label="Next image"
                             >
-                              <ChevronRight className="w-4 h-4 sm:w-6 sm:h-6" />
+                              <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
                             </button>
                           </>
                         )}
 
-                        <div className="relative z-10 mt-auto pt-16 sm:pt-48 pointer-events-none">
+                        <div className="relative z-10 mt-auto pt-10 sm:pt-48 pointer-events-none">
                           <p className="font-mono text-[9px] sm:text-xs text-violet-300">
                             CREATIVE DIRECTOR & EDITOR
                           </p>
-                          <p className="font-display text-base sm:text-xl font-bold text-white">
+                          <p className="font-display text-sm sm:text-xl font-bold text-white">
                             Yashwanth Chelluboina
                           </p>
                         </div>
@@ -697,27 +692,34 @@ export default function App() {
                     ) : (
                       <>
                         <div className="flex items-center justify-between gap-4 border-b border-white/10 pb-4">
-                          <span className="font-mono text-[10px] sm:text-xs text-violet-300">
+                          <span className="font-mono text-xs text-violet-300">
                             PORTRAIT FRAME // REPLACEABLE ASSET
                           </span>
                           <UserCheck className="w-4 h-4 text-violet-400 shrink-0" />
                         </div>
-                        <div className="my-auto py-4 sm:py-8 flex flex-col items-center text-center space-y-3 sm:space-y-4">
-                          <div className="w-16 h-16 sm:w-24 sm:h-24 rounded-2xl bg-violet-950/50 border border-violet-500/40 flex items-center justify-center font-display text-xl sm:text-3xl font-bold text-violet-200 shadow-inner">
+                        <div className="my-auto py-8 flex flex-col items-center text-center space-y-4">
+                          <div className="w-24 h-24 rounded-2xl bg-violet-950/50 border border-violet-500/40 flex items-center justify-center font-display text-3xl font-bold text-violet-200 shadow-inner">
                             YC
                           </div>
                           <div className="space-y-1.5 max-w-sm">
-                            <h3 className="font-display text-lg sm:text-xl font-bold text-white">
+                            <h3 className="font-display text-xl font-bold text-white">
                               Yashwanth Chelluboina
                             </h3>
-                            <p className="text-[10px] sm:text-xs font-mono text-zinc-400">
+                            <p className="text-xs font-mono text-zinc-400">
                               AI Prompt Engineer - Video & Photo Editor - Graphic Designer
+                            </p>
+                            <p className="text-xs text-zinc-400 leading-relaxed pt-2">
+                              Place your portrait photo in{' '}
+                              <code className="text-violet-300 font-mono">public/assets/</code> and set{' '}
+                              <code className="text-violet-300 font-mono">SITE_ASSETS.portraitUrl</code>{' '}
+                              inside{' '}
+                              <code className="text-violet-300 font-mono">src/data/projects.ts</code>.
                             </p>
                           </div>
                         </div>
-                        <div className="pt-3 sm:pt-4 border-t border-white/10 flex items-center justify-between text-[9px] sm:text-xs font-mono text-zinc-400">
+                        <div className="pt-4 border-t border-white/10 flex items-center justify-between text-xs font-mono text-zinc-400">
                           <span>BHIMAVARAM, INDIA</span>
-                          <span className="hidden sm:inline">AVAILABLE FOR COLLABORATION</span>
+                          <span>AVAILABLE FOR COLLABORATION</span>
                         </div>
                       </>
                     )}
