@@ -42,6 +42,12 @@ The website combines realistic 3D modeling, scroll-driven animation, and a clean
 - **Tailwind CSS** — Modern styling and responsive layouts
 - **Vite** — Frontend development tooling
 
+## Software & Technologies
+
+* **Video Editing & Motion Graphics:** Adobe Premiere Pro, Adobe After Effects, CapCut
+* **Graphic Design & Image Editing:** Adobe Photoshop, Canva
+* **AI Video Generation:** Higgsfield AI
+
 ## 👨‍💻 About Me
 
 I'm **Yashwanth Chelluboina**, a creative enthusiast interested in video editing, photo manipulation, graphic design, and immersive digital experiences.
