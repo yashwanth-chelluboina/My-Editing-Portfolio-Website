@@ -17,7 +17,6 @@ import {
   Play,
   UserCheck,
 } from 'lucide-react';
-
 import { MacBookScene, IntroAnimationRefs } from './components/MacBookScene';
 import { PlayableVideo } from './components/PlayableVideo';
 import { ProjectModal } from './components/ProjectModal';
@@ -33,6 +32,16 @@ import {
 import { getProceduralSceneDataUrl } from './utils/proceduralMedia';
 
 gsap.registerPlugin(ScrollTrigger);
+
+// Define your software stack with logo paths here
+const SOFTWARE_STACK = [
+  { name: 'Adobe After Effects', logo: '/images/Editing Logos/AE.png' },
+  { name: 'Adobe Premiere Pro', logo: '/images/Editing Logos/PR.png' },
+  { name: 'Adobe Photoshop', logo: '/images/Editing Logos/PS.png' },
+  { name: 'Higgsfield AI', logo: '/images/Editing Logos/higgsfield_ai.png' },
+  { name: 'Canva', logo: '/images/Editing Logos/Canva.png' },
+  { name: 'CapCut', logo: '/images/Editing Logos/capcut.png' },
+];
 
 export default function App() {
   // High-frequency animation refs (mutated without causing React re-renders on scroll)
@@ -180,7 +189,6 @@ export default function App() {
   // This recalculates GSAP positions when you filter categories to prevent empty space below
   useEffect(() => {
     let ctx: gsap.Context;
-
     const timer = setTimeout(() => {
       // Recalculates page height for ScrollTrigger so layout doesn't break
       ScrollTrigger.refresh();
@@ -230,7 +238,7 @@ export default function App() {
           trigger: introTrackRef.current,
           start: 'top top',
           end: 'bottom bottom',
-          scrub: true, 
+          scrub: true,
           onUpdate: (self) => {
             applyIntroProgress(self.progress);
           },
@@ -276,7 +284,6 @@ export default function App() {
       // Replaced .gsap-reveal for all sections OTHER than the filtered grid
       const revealSections = [
         eduSectionRef.current,
-        workSectionRef.current,
         showreelSectionRef.current,
         contactSectionRef.current,
       ].filter(Boolean) as HTMLElement[];
@@ -317,8 +324,9 @@ export default function App() {
     if (targetId === 'who-am-i') {
       const track = introTrackRef.current;
       if (track) {
+        // Scrolls perfectly to the point where GSAP animation finishes.
         const targetY = track.offsetTop + track.offsetHeight - window.innerHeight;
-        window.scrollTo({ top: targetY, behavior: 'smooth' });
+        window.scrollTo({ top: targetY + 5, behavior: 'smooth' });
       }
       return;
     }
@@ -330,12 +338,10 @@ export default function App() {
 
   const activeSkill =
     ROLE_SKILLS.find((s) => s.id === activeSkillId) || ROLE_SKILLS[0];
-
   const filteredProjects =
     selectedCategory === 'All'
       ? PROJECTS
       : PROJECTS.filter((p) => p.category === selectedCategory);
-
   const hasCustomPortrait = portraitImages.length > 0;
 
   return (
@@ -527,26 +533,32 @@ export default function App() {
               visibility: 'hidden',
               pointerEvents: 'none',
             }}
-            className="relative z-20 w-full h-full flex items-center justify-center pt-16 px-5 sm:px-8 lg:px-12 overflow-y-auto lg:overflow-hidden"
+            /* 
+              COMPACTED & SCROLL-FREE LAYOUT:
+              - overflow-y-auto is left in place ONLY as a fallback for ultra-tiny screens so it doesn't break,
+                BUT the invisible scrollbar utility ensures no ugly bars show up.
+              - Paddings and spacing are aggressively shrunk so it fits perfectly on standard 13" laptops without triggering scroll.
+            */
+            className="relative z-20 w-full h-full flex flex-col overflow-y-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden pt-[72px] lg:pt-[80px] pb-4 px-4 sm:px-6 lg:px-12"
           >
-            <div className="w-full max-w-7xl mx-auto py-8 lg:py-0">
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
+            <div className="w-full max-w-7xl mx-auto my-auto shrink-0 pb-2">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-8 items-center">
                 <div
                   ref={heroHeadlineRef}
-                  className="lg:col-span-7 flex flex-col justify-center space-y-6"
+                  className="lg:col-span-7 flex flex-col justify-center space-y-2 lg:space-y-3"
                 >
-                  <div className="flex items-center gap-2 text-xs font-mono tracking-widest text-violet-400">
+                  <div className="flex items-center gap-1.5 sm:gap-2 text-[9px] sm:text-[10px] font-mono tracking-widest text-violet-400">
                     <span>WHO AM I?</span>
                     <span aria-hidden="true"> </span>
                     <span>MULTI DISCIPLINARY VISUAL CREATOR</span>
                   </div>
                   <h1
-                    className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.08]"
+                    className="font-display text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight leading-none"
                     style={{ textWrap: 'balance' }}
                   >
                     Yashwanth Chelluboina
                   </h1>
-                  <p className="text-base sm:text-lg text-zinc-300 leading-relaxed max-w-2xl">
+                  <p className="text-[11px] sm:text-xs text-zinc-300 leading-snug sm:leading-normal max-w-2xl">
                     I bridge structured <span className="text-white font-medium">AI prompt engineering</span>,
                     narrative <span className="text-white font-medium">video editing</span>, high-frequency{' '}
                     <span className="text-white font-medium">photo retouching</span>, and bold{' '}
@@ -554,14 +566,32 @@ export default function App() {
                     to final color grade, I turn raw ideas into cohesive, cinema-grade visual stories.
                   </p>
 
-                  <div className="space-y-3 pt-1">
-                    <p className="font-mono text-xs text-zinc-400">
+                  {/* PROFESSIONAL SOFTWARE SECTION WITH LOGOS (GRID LAYOUT: exactly 3 UP, 3 DOWN) */}
+                  <div className="pt-1">
+                    <p className="font-mono text-[9px] sm:text-[10px] text-violet-300 mb-1 sm:mb-1.5 tracking-widest">
+                      PROFESSIONAL SOFTWARE & TECHNOLOGIES
+                    </p>
+                    <div className="grid grid-cols-3 gap-1.5 sm:gap-2 w-full max-w-2xl">
+                      {SOFTWARE_STACK.map((tool) => (
+                        <span 
+                          key={tool.name} 
+                          className="flex flex-col xl:flex-row items-center justify-center xl:justify-start gap-1 px-1 sm:px-2 py-1 text-[8px] sm:text-[9px] lg:text-[10px] font-medium text-zinc-300 bg-[#0c0c14] border border-white/10 rounded-lg hover:border-violet-500/50 hover:text-white transition-colors cursor-default shadow-sm w-full text-center xl:text-left"
+                        >
+                          <img src={tool.logo} alt={tool.name} className="w-3.5 h-3.5 sm:w-4 sm:h-4 object-contain shrink-0" />
+                          <span className="truncate w-full leading-tight">{tool.name}</span>
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="space-y-1.5 pt-0.5">
+                    <p className="font-mono text-[9px] sm:text-[10px] text-zinc-400">
                       SELECT A CORE DISCIPLINE TO INSPECT WORKFLOW
                     </p>
                     <div
                       role="tablist"
                       aria-label="Professional Roles"
-                      className="grid grid-cols-2 sm:grid-cols-4 gap-2.5"
+                      className="grid grid-cols-2 sm:grid-cols-4 gap-1.5"
                     >
                       {ROLE_SKILLS.map((skill) => {
                         const isSelected = skill.id === activeSkill.id;
@@ -573,16 +603,16 @@ export default function App() {
                             type="button"
                             onClick={() => setActiveSkillId(skill.id)}
                             onMouseEnter={() => setActiveSkillId(skill.id)}
-                            className={`text-left p-3 rounded-xl border transition-all duration-150 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-400 ${
+                            className={`text-left p-1.5 sm:p-2 rounded-xl border transition-all duration-150 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-400 ${
                               isSelected
                                 ? 'bg-violet-950/45 border-violet-500/70 text-white shadow-lg shadow-violet-950/30 -translate-y-0.5'
                                 : 'bg-[#0c0c14] border-white/10 text-zinc-300 hover:border-white/25 hover:text-white'
                             }`}
                           >
-                            <span className="block font-mono text-[10px] text-violet-300">
+                            <span className="block font-mono text-[8px] sm:text-[9px] text-violet-300">
                               {skill.shortCode}
                             </span>
-                            <span className="mt-1 block font-display text-xs sm:text-sm font-semibold whitespace-nowrap truncate">
+                            <span className="mt-0.5 sm:mt-1 block font-display text-[9px] sm:text-[11px] font-semibold whitespace-nowrap truncate">
                               {skill.title}
                             </span>
                           </button>
@@ -591,20 +621,20 @@ export default function App() {
                     </div>
                     <div
                       role="tabpanel"
-                      className="p-4 sm:p-5 rounded-xl bg-[#0c0c15] border border-white/10 space-y-2.5"
+                      className="p-2 sm:p-3 rounded-xl bg-[#0c0c15] border border-white/10 space-y-1"
                     >
                       <div className="flex items-center justify-between gap-4">
-                        <h2 className="font-display text-sm sm:text-base font-semibold text-violet-200">
+                        <h2 className="font-display text-xs sm:text-[13px] font-semibold text-violet-200">
                           {activeSkill.title}
                         </h2>
-                        <span className="font-mono text-xs text-zinc-400">
+                        <span className="font-mono text-[9px] sm:text-[10px] text-zinc-400">
                           {activeSkill.shortCode}
                         </span>
                       </div>
-                      <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed">
+                      <p className="text-[9.5px] sm:text-[11px] text-zinc-300 leading-snug">
                         {activeSkill.summary}
                       </p>
-                      <div className="pt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs font-mono text-zinc-400">
+                      <div className="pt-0.5 flex flex-wrap items-center gap-x-2 sm:gap-x-3 gap-y-1 text-[8.5px] sm:text-[9px] font-mono text-zinc-400">
                         {activeSkill.highlights.map((item, idx) => (
                           <React.Fragment key={item}>
                             {idx > 0 && <span aria-hidden="true"> </span>}
@@ -614,21 +644,20 @@ export default function App() {
                       </div>
                     </div>
                   </div>
-
-                  <div className="flex flex-wrap items-center gap-4 pt-2">
+                  <div className="flex flex-wrap items-center gap-2 sm:gap-3 pt-0.5">
                     <button
                       type="button"
                       onClick={() => scrollToSection('work')}
-                      className="px-6 py-3 rounded-xl bg-violet-600 hover:bg-violet-500 text-sm font-semibold text-white transition-colors whitespace-nowrap shrink-0 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-400"
+                      className="px-4 py-1.5 sm:py-2 rounded-xl bg-violet-600 hover:bg-violet-500 text-[10px] sm:text-xs font-semibold text-white transition-colors whitespace-nowrap shrink-0 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-400"
                     >
                       Explore 9 Creative Works
                     </button>
                     <button
                       type="button"
                       onClick={() => scrollToSection('showreel')}
-                      className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-white/8 hover:bg-white/14 border border-white/12 text-sm font-medium text-zinc-200 hover:text-white transition-colors whitespace-nowrap shrink-0 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-400"
+                      className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl bg-white/8 hover:bg-white/14 border border-white/12 text-[10px] sm:text-xs font-medium text-zinc-200 hover:text-white transition-colors whitespace-nowrap shrink-0 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-400"
                     >
-                      <Play className="w-4 h-4 text-violet-400" />
+                      <Play className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-violet-400" />
                       <span>Watch Showreel</span>
                     </button>
                   </div>
@@ -636,10 +665,11 @@ export default function App() {
 
                 <div
                   ref={heroPortraitRef}
-                  className="lg:col-span-5 flex flex-col justify-center"
+                  className="lg:col-span-5 flex flex-col justify-center w-full"
                 >
+                  {/* REDUCED MAX-HEIGHT ON PORTRAIT SO IT DOESN'T BLOW OUT THE SCREEN BOUNDS ON LAPTOPS */}
                   <div 
-                    className="group relative w-full h-full min-h-[360px] sm:min-h-[430px] rounded-2xl overflow-hidden bg-[#0b0b14] border border-white/12 shadow-2xl flex flex-col justify-between p-6 sm:p-8"
+                    className="group relative w-full aspect-[4/5] max-w-[200px] sm:max-w-[260px] lg:max-w-[320px] xl:max-w-[380px] mx-auto rounded-2xl overflow-hidden bg-[#0b0b14] border border-white/12 shadow-2xl flex flex-col justify-between p-3 sm:p-4"
                     onMouseEnter={() => setIsPaused(true)}
                     onMouseLeave={() => setIsPaused(false)}
                   >
@@ -664,62 +694,51 @@ export default function App() {
                             <button
                               type="button"
                               onClick={handlePrevImage}
-                              className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-black/40 hover:bg-violet-600 text-white opacity-0 group-hover:opacity-100 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-violet-400 cursor-pointer"
+                              className="absolute left-2 sm:left-3 top-1/2 -translate-y-1/2 z-20 p-1.5 sm:p-2 rounded-full bg-black/40 hover:bg-violet-600 text-white opacity-0 group-hover:opacity-100 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-violet-400 cursor-pointer"
                               aria-label="Previous image"
                             >
-                              <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
+                              <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
                             </button>
                             <button
                               type="button"
                               onClick={handleNextImage}
-                              className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-black/40 hover:bg-violet-600 text-white opacity-0 group-hover:opacity-100 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-violet-400 cursor-pointer"
+                              className="absolute right-2 sm:right-3 top-1/2 -translate-y-1/2 z-20 p-1.5 sm:p-2 rounded-full bg-black/40 hover:bg-violet-600 text-white opacity-0 group-hover:opacity-100 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-violet-400 cursor-pointer"
                               aria-label="Next image"
                             >
-                              <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
+                              <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
                             </button>
                           </>
                         )}
 
-                        <div className="relative z-10 mt-auto pt-48 pointer-events-none">
-                          <p className="font-mono text-xs text-violet-300">
+                        <div className="relative z-10 mt-auto pt-16 lg:pt-32 pointer-events-none">
+                          <p className="font-mono text-[9px] sm:text-[10px] text-violet-300">
                             CREATIVE DIRECTOR & EDITOR
                           </p>
-                          <p className="font-display text-xl font-bold text-white">
+                          <p className="font-display text-sm sm:text-base lg:text-lg font-bold text-white">
                             Yashwanth Chelluboina
                           </p>
                         </div>
                       </>
                     ) : (
                       <>
-                        <div className="flex items-center justify-between gap-4 border-b border-white/10 pb-4">
-                          <span className="font-mono text-xs text-violet-300">
-                            PORTRAIT FRAME // REPLACEABLE ASSET
+                        <div className="flex items-center justify-between gap-4 border-b border-white/10 pb-2 sm:pb-3">
+                          <span className="font-mono text-[9px] sm:text-[10px] text-violet-300">
+                            PORTRAIT FRAME
                           </span>
-                          <UserCheck className="w-4 h-4 text-violet-400 shrink-0" />
+                          <UserCheck className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-violet-400 shrink-0" />
                         </div>
-                        <div className="my-auto py-8 flex flex-col items-center text-center space-y-4">
-                          <div className="w-24 h-24 rounded-2xl bg-violet-950/50 border border-violet-500/40 flex items-center justify-center font-display text-3xl font-bold text-violet-200 shadow-inner">
+                        <div className="my-auto py-4 flex flex-col items-center text-center space-y-3">
+                          <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-violet-950/50 border border-violet-500/40 flex items-center justify-center font-display text-2xl font-bold text-violet-200 shadow-inner">
                             YC
                           </div>
-                          <div className="space-y-1.5 max-w-sm">
-                            <h3 className="font-display text-xl font-bold text-white">
+                          <div className="space-y-1 max-w-[200px] sm:max-w-xs">
+                            <h3 className="font-display text-sm sm:text-base font-bold text-white">
                               Yashwanth Chelluboina
                             </h3>
-                            <p className="text-xs font-mono text-zinc-400">
-                              AI Prompt Engineer - Video & Photo Editor - Graphic Designer
-                            </p>
-                            <p className="text-xs text-zinc-400 leading-relaxed pt-2">
-                              Place your portrait photo in{' '}
-                              <code className="text-violet-300 font-mono">public/assets/</code> and set{' '}
-                              <code className="text-violet-300 font-mono">SITE_ASSETS.portraitUrl</code>{' '}
-                              inside{' '}
-                              <code className="text-violet-300 font-mono">src/data/projects.ts</code>.
+                            <p className="text-[9px] sm:text-[10px] font-mono text-zinc-400">
+                              AI Prompt Engineer - Editor
                             </p>
                           </div>
-                        </div>
-                        <div className="pt-4 border-t border-white/10 flex items-center justify-between text-xs font-mono text-zinc-400">
-                          <span>BHIMAVARAM, INDIA</span>
-                          <span>AVAILABLE FOR COLLABORATION</span>
                         </div>
                       </>
                     )}
@@ -732,10 +751,11 @@ export default function App() {
       </div>
 
       <main className="relative z-20 bg-[#050508]">
+        {/* Added scroll-mt-16 to ensure standard anchor links don't get covered by the sticky header */}
         <section
           id="education"
           ref={eduSectionRef}
-          className="py-24 sm:py-32 px-5 sm:px-8 lg:px-12 border-t border-white/10"
+          className="py-24 sm:py-32 px-5 sm:px-8 lg:px-12 border-t border-white/10 scroll-mt-16"
         >
           <div className="max-w-7xl mx-auto">
             <div className="gsap-reveal max-w-2xl space-y-3">
@@ -812,7 +832,7 @@ export default function App() {
         <section
           id="work"
           ref={workSectionRef}
-          className="py-24 sm:py-32 px-5 sm:px-8 lg:px-12 border-t border-white/10 bg-[#07070c]"
+          className="py-24 sm:py-32 px-5 sm:px-8 lg:px-12 border-t border-white/10 bg-[#07070c] scroll-mt-16"
         >
           <div className="max-w-7xl mx-auto">
             <div className="gsap-reveal flex flex-col lg:flex-row lg:items-end justify-between gap-6">
@@ -924,6 +944,7 @@ export default function App() {
                         </p>
                       </div>
                     </div>
+
                     <div className="px-6 pb-5 pt-3 border-t border-white/8 flex items-center justify-between gap-2 text-xs font-mono text-zinc-400">
                       <span className="truncate">{project.tools.slice(0, 3).join(' - ')}</span>
                       <span className="text-violet-300 group-hover:translate-x-0.5 transition-transform shrink-0">
@@ -940,7 +961,7 @@ export default function App() {
         <section
           id="showreel"
           ref={showreelSectionRef}
-          className="py-24 sm:py-32 px-5 sm:px-8 lg:px-12 border-t border-white/10"
+          className="py-24 sm:py-32 px-5 sm:px-8 lg:px-12 border-t border-white/10 scroll-mt-16"
         >
           <div className="max-w-7xl mx-auto space-y-10">
             <div className="gsap-reveal flex flex-col lg:flex-row lg:items-end justify-between gap-6">
@@ -984,7 +1005,7 @@ export default function App() {
         <section
           id="contact"
           ref={contactSectionRef}
-          className="py-24 sm:py-32 px-5 sm:px-8 lg:px-12 border-t border-white/10 bg-[#07070c]"
+          className="py-24 sm:py-32 px-5 sm:px-8 lg:px-12 border-t border-white/10 bg-[#07070c] scroll-mt-16"
         >
           <div className="max-w-7xl mx-auto space-y-12">
             <div className="gsap-reveal max-w-2xl space-y-4">
@@ -1089,7 +1110,7 @@ export default function App() {
         <footer className="py-8 px-5 sm:px-8 lg:px-12 border-t border-white/10 bg-[#050508] text-xs text-zinc-500">
           <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
             <p className="font-display text-zinc-400">
-              © {new Date().getFullYear()} Yashwanth Edits - Yashwanth Chelluboina
+                {new Date().getFullYear()} Yashwanth Edits - Yashwanth Chelluboina
             </p>
             <div className="flex items-center gap-6">
               <button
