@@ -205,10 +205,10 @@ export const PROJECTS: PortfolioProject[] = [
   {
     id: 'video-03',
     slotNumber: '03',
-    title: 'Movie Intro || AI Cinematic Title Sequence',
+    title: 'Movie Intro || Cinematic Title Intro',
     category: 'Video Editing',
     shortDescription:
-      'A cinematic title sequence for a movie intro, leveraging AI-generated visuals and advanced editing techniques to create a visually stunning opening.',
+      'A cinematic title sequence for a movie intro, leveraging visuals and advanced editing techniques to create a visually stunning opening.',
     detailedDescription:
       'This project showcases the use of After Effects and Premiere Pro to craft a dynamic and engaging title sequence and enhance the cinematic experience.',
     tools: ['After Effects', 'Premiere Pro', 'Motion Graphics'],
